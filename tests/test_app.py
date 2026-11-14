@@ -29,6 +29,32 @@ class AppTest(unittest.TestCase):
 
 		self.assertEqual(response.status_code, 200)
 		get_profile.assert_not_called()
+		self.assertIn(
+			'<section id="generated-result" hidden>',
+			response.get_data(as_text=True),
+		)
+
+	def test_homepage_shows_generated_result_when_phrase_is_present(self):
+		response = self.client.get(
+			"/tweet-generator",
+			query_string={"phrase": "A generated sentence."},
+		)
+		page = response.get_data(as_text=True)
+
+		self.assertIn('<section id="generated-result">', page)
+		self.assertIn("<p>Phrase: A generated sentence.</p>", page)
+
+	def test_homepage_renders_hidden_generation_error_with_issue_link(self):
+		response = self.client.get("/tweet-generator")
+		page = response.get_data(as_text=True)
+
+		self.assertIn('id="generation-error"', page)
+		self.assertIn('role="alert"', page)
+		self.assertIn(
+			'href="https://github.com/noltron000/tweet-generator/issues/new"',
+			page,
+		)
+		self.assertIn("Report this issue on GitHub", page)
 
 	def test_homepage_decodes_compressed_phrase_before_rendering(self):
 		phrase = "A generated sentence with punctuation: caf\u00e9!"
