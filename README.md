@@ -10,6 +10,14 @@ Then, it posts the random phrase to Twitter.
 The app uses a technology called "Markov Chaining" to accomplish this chatbot-like effect, although it is not nearly as advanced as modern AI would be.
 However, it is like a baby version of modern AI, which is certainly interesting!
 
+<div align="center">
+	<img
+		src="assets/tumblr_oww96sJIFE1ss3vv0o1_1280.jpg"
+		alt="Frankenstein artwork banner"
+		width="50%"
+	>
+</div>
+
 ## Website Routes
 | Method | Route                                 | Purpose                                                |
 | ------ | ------------------------------------- | ------------------------------------------------------ |
